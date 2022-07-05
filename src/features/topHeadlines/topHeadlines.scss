@@ -1,0 +1,32 @@
+.top-headlines-container {
+    padding: 50px 0;
+
+    .filter-container {
+        h2 {
+            margin: 0;
+            color: #4d4a48;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: normal;
+            font-size: 18px;
+        }
+    }
+}
+
+@media screen and (max-width: 385px) {
+    .top-headlines-container {
+        .filter-container {
+            align-items: flex-start;
+            flex-direction: column;
+            margin-bottom: 40px;
+
+            h2 {
+                margin-bottom: 10px;
+            }
+
+            .select-container {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+    }
+}

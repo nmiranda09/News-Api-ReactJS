@@ -1,0 +1,18 @@
+.error-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 100px 25px;
+    text-align: center;
+
+    .circle-xmark-icon {
+        color: #cb2d2d;
+        font-size: 80px;
+    }
+
+    h1 {
+        color: #cb2d2d;
+    }
+}

@@ -1,0 +1,117 @@
+.wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+.card-container {
+    column-gap: 3%;
+    display: flex;
+    flex-wrap: wrap;
+
+    & > div {
+        width: 31%;
+        margin-bottom: 3%;
+    }
+}
+
+.filter-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .select-container {
+        position: relative;
+        margin-left: 10px;
+    
+        .dropdown-container {
+            width: 100%;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            display: none;
+            background: #fff;
+            border: 1px solid #e7e7e9;
+            border-radius: 8px;
+            box-shadow: 0 3px 12px 0px rgb(0, 0, 0, 0.2);
+            z-index: 10;
+    
+            ul {
+                margin: 0;
+                padding: 16px;
+                list-style: none;
+    
+                li {
+                    margin-bottom: 16px;
+                    color: #4d4a48;
+                    cursor: pointer;
+    
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+    
+                    &.active {
+                        color: #108092;
+                        font-weight: 700;
+                    }
+
+                    &:hover {
+                        color: #108092;
+                    }
+                }
+            }
+        }
+    
+        .btn-container {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            min-width: 220px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 0px 1px #e7e7e9 inset;
+            color: #4d4a48;
+            cursor: pointer;
+    
+            &.active {
+                & + .dropdown-container {
+                    display: block;
+                }
+    
+                .angle-down-icon {
+                    transform: rotate(180deg);
+                }
+            }
+    
+            .angle-down-icon {
+                color: #4d4a48;
+                transition: transform 0.5s ease-in-out;
+            }
+            
+        }
+    }
+}
+
+@media screen and (max-width: 1025px) {
+    .card-container {
+        column-gap: 6%;
+
+        & > div {
+            width: 47%;
+            margin-bottom: 6%;
+        }
+    }
+}
+
+@media screen and (max-width: 597px) {
+    .card-container {
+        & > div {
+            width: 100%;
+            margin-bottom: 40px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
