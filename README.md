@@ -1,10 +1,30 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with Redux Toolkit for [Create React App](https://redux-toolkit.js.org/introduction/getting-started).
+
+- npx create-react-app my-app --template redux
+
+# Tech Stacks
+- React version 18.2.0
+- Redux Toolkit (RTK Query for fetching News Api (https://newsapi.org/))
+- React Router version 6.3 (Routing Components)
+- CSS Pre-processor (SCSS)
+- Javascript
+
+# To be expected
+- Skeleton Loaders
+- List of Data in Cards
+- Search function that displays List of Data in Cards
+- Sorting & Filtering
+- Responsive layout (Desktop first)
+- RTK Queries from Redux Toolkit (createApi, fetchBaseQuery, endpoints) for REST API methods
+- React Router 6 implemenentation for component routing
+- Organized folders (article,card,header, etc)
+- SCSS for styles
 
 ## Available Scripts
 
-Install packages
+Please install packages before starting the project.
 
 ### `npm install or npm i`
 
