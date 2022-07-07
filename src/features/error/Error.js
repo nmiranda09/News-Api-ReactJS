@@ -4,8 +4,6 @@ import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import './error.scss';
 
 function Error(props) {
-    console.log(props);
-
     return (
         <div className="error-container">
             <FontAwesomeIcon icon={faCircleXmark} className="circle-xmark-icon" />

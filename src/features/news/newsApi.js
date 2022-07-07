@@ -20,10 +20,9 @@ export const newsApiSlice = createApi({
                     return {
                         url: `/top-headlines`,
                         headers: { 'x-api-key': `${NEWS_API_KEY}` },
-                        params: { country, page, pageSize: 20 },
+                        params: { country, page },
                     };
                 },
-                invalidatesTags: ['api'],
             }),
 
             searchArticle: builder.query({
@@ -37,7 +36,6 @@ export const newsApiSlice = createApi({
                         params: { q, page, sortBy, pageSize: 20 },
                     };
                 },
-                invalidatesTags: ['api'],
             }),
 
         };

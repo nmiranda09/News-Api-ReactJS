@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../card/Card';
 import CardSkeleton from '../card/CardSkeleton';
 import Error from '../error/Error';
+import Loader from '../loader/Loader';
 import { useFetchArticlesQuery } from '../news/newsApi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
@@ -10,12 +11,14 @@ import './topHeadlines.scss';
 
 
 function TopHeadlines() {
-    //to do Load More for setCurrentPage
+    let filterActive;
+    const [items, setItems] = useState([]);
+    const [loadMore, setLoadMore] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [dropdownActive, toggleDropdown] = useState(false);
     //default Filter United States(us)
     const [countries, setCountries] = useState('us');
-    const { data = [], isFetching, error, isError } = useFetchArticlesQuery({country: countries, page: currentPage});
+    const { data, error, isError, isFetching, isLoading } = useFetchArticlesQuery({country: countries, page: currentPage});
     const countryFilter = {
         us: 'United States',
         gb: 'United Kingdom',
@@ -24,15 +27,34 @@ function TopHeadlines() {
         ca: 'Canada'
     }
 
-    console.log(error, 'error')
-    console.log(isError, 'isError')
-
-    let filterActive;
+    useEffect(() => {
+        loopWithSlice();
+    }, [data]);
 
     for (const [key, value] of Object.entries(countryFilter)) {
         if (countries === key) {
             filterActive = value;
         }
+    }
+
+    const loopWithSlice = () => {
+        if (data) {
+            
+            setItems((items) => {
+                return [...new Set([...items, ...data.articles])];
+            });
+
+            if (data.articles.length > 0) {
+                setLoadMore(true);
+            } else {
+                setLoadMore(false);
+            }
+        }
+    };
+
+    const loadMoreItems = () => {
+        loopWithSlice();
+        setCurrentPage(currentPage + 1);
     }
 
     if (isError) return <Error message={error.data.message} /> ;
@@ -51,7 +73,6 @@ function TopHeadlines() {
                         
                         <div className="dropdown-container">
                             <ul >
-                                {/* iterate object KEYS */}
                                 {
                                     Object.keys(countryFilter).map((key, index) => {
                                         return (
@@ -60,6 +81,8 @@ function TopHeadlines() {
                                                 className={key === countries ? 'active' : ''}
                                                 onClick={() => {
                                                     setCountries(key);
+                                                    setCurrentPage(1);
+                                                    setItems([]);
                                                     toggleDropdown(dropdownActive => false);
                                                 }}>
 
@@ -76,13 +99,26 @@ function TopHeadlines() {
                 { 
                     isFetching ? <CardSkeleton /> :
                         <div className="card-container">
-                            {data.articles.map((article, i) => (
-                                <div key={i}>
-                                    <Card article={article}/>
-                                </div>
-                            ))}
+                            {items.map((article, i) => {
+                                return (
+                                    <div key={i}>
+                                        <Card article={article}/>
+                                        
+                                    </div>
+                                );
+                            })}
+
                         </div>
                 }
+
+                { loadMore && isFetching &&  <Loader /> }
+
+                { loadMore && !isFetching && (
+                    <div className="load-more-container">
+                        <button onClick={loadMoreItems}>Load more articles</button>
+                    </div>
+                )}
+
             </div>
         </div>
     )
